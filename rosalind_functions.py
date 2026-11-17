@@ -126,11 +126,8 @@ for pos, length in reverse_palindrome(seq):
 #TRAN
 def TRAN(s1: str, s2: str) -> float:
     transitions_set = {('A', 'G'), ('G', 'A'), ('C', 'T'), ('T', 'C')}
-    
     transitions = 0
     transversions = 0
-    
-
     for base1, base2 in zip(s1, s2):
         if base1 != base2:
             if (base1, base2) in transitions_set:
