@@ -41,8 +41,30 @@ def HAMM(seq1, seq2):
     return count
 
 #PROT
-def PROT():
-    #
+def PRTN(RNA_seq):
+    RNA_codons = {
+       "UUU": "F", "CUU": "L", "AUU": "I", "GUU": "V",
+       "UUC": "F", "CUC": "L", "AUC": "I", "GUC": "V",
+       "UUA": "L", "CUA": "L", "AUA": "I", "GUA": "V",
+       "UUG": "L", "CUG": "L", "AUG": "M", "GUG": "V",
+       "UCU": "S", "CCU": "P", "ACU": "T", "GCU": "A",
+       "UCC": "S", "CCC": "P", "ACC": "T", "GCC": "A",
+       "UCA": "S", "CCA": "P", "ACA": "T", "GCA": "A",
+       "UCG": "S", "CCG": "P", "ACG": "T", "GCG": "A",
+       "UAU": "Y", "CAU": "H", "AAU": "N", "GAU": "D",
+       "UAC": "Y", "CAC": "H", "AAC": "N", "GAC": "D",
+       "UAA":  "", "CAA": "Q", "AAA": "K", "GAA": "E",
+       "UAG":  "", "CAG": "Q", "AAG": "K", "GAG": "E",
+       "UGU": "C", "CGU": "R", "AGU": "S", "GGU": "G",
+       "UGC": "C", "CGC": "R", "AGC": "S", "GGC": "G",
+       "UGA":  "", "CGA": "R", "AGA": "R", "GGA": "G",
+       "UGG": "W", "CGG": "R", "AGG": "R", "GGG": "G"
+    }
+    codons = []
+    for i in range(0, len(RNA_seq), 3):
+        RNA = RNA_seq[i: i + 3]
+        codons.append(RNA_codons.get(RNA, ''))
+    return ''.join(codons)
 
 #SUBS
 def SUBS(s1, s2):
@@ -81,5 +103,41 @@ def protein_mass(protein_seq):
   return round(mass_total, 3)
 
 
+#REVP
+bp = {'A': 'T', 'G': 'C', 'T': 'A', 'C': 'G'}
+
+def reverse_comp(seq):
+    return ''.join(bp[letter] for letter in reversed(seq))
+
+def reverse_palindrome(seq):
+    results = []
+    for i in range(len(seq)):
+        for length in range(4, 13):
+            if i + length > len(seq):
+                break
+            sub = seq[i:i + length]
+            if sub == reverse_comp(sub):
+                results.append((i + 1, length)) 
+    return results
+
+for pos, length in reverse_palindrome(seq):
+    return(pos, length)
+
+#TRAN
+def TRAN(s1: str, s2: str) -> float:
+    transitions_set = {('A', 'G'), ('G', 'A'), ('C', 'T'), ('T', 'C')}
+    
+    transitions = 0
+    transversions = 0
+    
+
+    for base1, base2 in zip(s1, s2):
+        if base1 != base2:
+            if (base1, base2) in transitions_set:
+                transitions += 1
+            else:
+                transversions += 1
+                
+    return transitions / transversions
 
 
