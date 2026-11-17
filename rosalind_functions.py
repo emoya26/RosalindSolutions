@@ -1,10 +1,18 @@
+#DNA
 def DNA_count_A(seq):
     A_total = seq.count("A")
-    return A_total
+    C_total = seq.count("C")
+    G_total = seq.count("G")
+    T_total = seq.count("T")
 
+    return  A_total, C_total, G_total, T_total
+
+#RNA
 def DNA_to_RNA(seq):
-       return(seq.replace "T", "U")
+    return seq.replace("T", "U")
 
+
+#REVC
 bp = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
 def reverse_complement(seq):
     seq = seq.upper()
@@ -17,12 +25,14 @@ def reverse_complement(seq):
             answer += 'X'
     return answer
 
+#GC
 def gc_calc(seq):
     count_c = seq.count("C")
     count_g = seq.count("G")
     gc_percent = ((count_c + count_g) / len(seq)) * 100
     return gc_percent
 
+#HAMM
 def HAMM(seq1, seq2):
     count = 0
     for i in range(len(seq1)):
@@ -30,9 +40,11 @@ def HAMM(seq1, seq2):
             count += 1
     return count
 
+#PROT
 def PROT():
     #
 
+#SUBS
 def SUBS(s1, s2):
     positions = []
     start = s1.find(s2)
@@ -41,6 +53,7 @@ def SUBS(s1, s2):
         start = s1.find(s2, start + 1)
     return positions
 
+#PRTM
 mass_AAs = {
     "A": 71.03711,
     "C": 103.00919,
